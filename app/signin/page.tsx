@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SigninPage = () => {
+  const router = useRouter();
   //Next Auth Providers
   const [providers, setProviders] = useState(null);
   useEffect(() => {
@@ -37,7 +39,7 @@ const SigninPage = () => {
                       className="mb-6 flex w-full items-center justify-center rounded-md bg-white p-3 text-base font-medium
                                      text-body-color shadow-one hover:text-primary dark:bg-[#242B51] dark:text-body-color dark:shadow-signUp
                                      dark:hover:text-white"
-                      onClick={() => signIn(provider.id)}
+                      onClick={() => signIn(provider.id, { callbackUrl: "/" })}
                     >
                       <span className="mr-3">
                         <svg

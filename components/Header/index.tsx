@@ -189,14 +189,9 @@ const Header = () => {
                     onMouseLeave={() => setToggleProfDropDown((prev) => !prev)}
                   >
                     <div className=" text-gray-900 block space-y-2 px-4 py-3 text-sm dark:text-white">
-                      <Image
-                        src={session?.user.image}
-                        alt="logo"
-                        width={32}
-                        height={32}
-                        className="rounded-lg "
-                      />
-                      <div>{session.user.name}</div>
+                      <div className="flex truncate font-medium">
+                        {session.user.name}
+                      </div>
                       <div className="flex truncate font-medium">
                         {session.user.email}
                       </div>
@@ -204,7 +199,7 @@ const Header = () => {
                     <div className="block py-5">
                       <Link
                         href={"/profile"}
-                        className="text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 block text-sm hover:opacity-70 dark:hover:text-white"
+                        className="text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 block text-sm hover:opacity-70 dark:text-white dark:hover:text-white"
                       >
                         View Profile
                       </Link>
@@ -216,7 +211,7 @@ const Header = () => {
                         type="button"
                         onClick={() => {
                           setToggleProfDropDown(false);
-                          signOut();
+                          signOut({ callbackUrl: "/" });
                         }}
                       >
                         Sign Out
@@ -228,17 +223,18 @@ const Header = () => {
                 <div className="flex items-center justify-end pr-16 lg:pr-0">
                   <Link
                     href="/signin"
-                    className="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block"
+                    className="ease-in-up  rounded-md bg-primary py-3 px-8 text-base font-bold text-white transition duration-300 hover:bg-opacity-90
+                    hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9"
                   >
                     Sign In
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/signup"
                     className="ease-in-up hidden rounded-md bg-primary py-3 px-8 text-base font-bold text-white transition duration-300 hover:bg-opacity-90
                                  hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9"
                   >
                     Sign Up
-                  </Link>
+                  </Link> */}
                   <div>
                     <ThemeToggler />
                   </div>

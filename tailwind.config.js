@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
+    "./node_modules/flowbite-react/**/*.js",
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -17,9 +19,10 @@ module.exports = {
       white: "#FFFFFF",
       black: "#090E34",
       dark: "#1D2144",
-      gray: "#1D2144",
+      gray: "#808080",
       primary: "#4A6CF7",
       yellow: "#FBB040",
+      red: "#dc143c",
       "body-color": "#959CB1",
     },
     screens: {
@@ -49,5 +52,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
