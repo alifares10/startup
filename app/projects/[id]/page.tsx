@@ -51,16 +51,19 @@ const MyProject = ({ params }) => {
         pageName={title}
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
       />
-      {/* <button className="btn mx-auto flex justify-center">asdasd</button> */}
 
-      <div className="mx-auto mt-5 mb-5 flex w-full  justify-center px-4 ">
+      <div className="mx-auto mt-5 mb-5 flex w-full justify-center px-4 ">
         <ViewProject
           project={project}
           handleDelete={() => handleDelete(project)}
           handleEdit={() => handleEdit()}
         />
       </div>
-      {Edit && <EditProject handleEdit={handleEdit} />}
+      {Edit && (
+        <div className="] mx-auto mt-10 mb-10 flex items-center justify-center">
+          <EditProject handleEdit={handleEdit} project={project} />
+        </div>
+      )}
     </>
   );
 };

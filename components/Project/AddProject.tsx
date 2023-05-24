@@ -47,13 +47,13 @@ const AddProject = (props: Props) => {
       {session?.user && (
         <section
           id="contact"
-          className="overflow-hidden py-16 md:py-20 lg:py-28"
+          className="items-center justify-center overflow-hidden py-2 md:py-20 lg:py-28"
         >
-          <div className="container">
-            <div className="-mx-4 flex flex-wrap">
-              <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
+          <div className="container items-center justify-center">
+            <div className="-mx-4 flex flex-wrap items-center justify-center">
+              <div className="w-full  px-4 lg:w-7/12 xl:w-8/12">
                 <div
-                  className="wow fadeInUp mb-12 rounded-md bg-primary/[3%] py-11 px-8 dark:bg-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
+                  className="wow fadeInUp mb-12 items-center justify-center rounded-md bg-primary/[3%] py-11 px-8 dark:bg-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
                   data-wow-delay=".15s
           "
                 >
@@ -135,7 +135,7 @@ const AddProject = (props: Props) => {
                           ></textarea>
                         </div>
                       </div>
-                      <div className="w-full px-4">
+                      <div className="flex w-full justify-center px-4">
                         <button
                           onClick={handleAddProject}
                           className="rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300

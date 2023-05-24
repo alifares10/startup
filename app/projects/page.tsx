@@ -1,22 +1,27 @@
-import SingleProject from "@/components/Project/SingleProject";
+"use client";
+
 import ProjectData from "@/components/Project/ProjectData";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import AddProject from "@/components/Project/AddProject";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 type Props = {};
 
 const Projects = (props: Props) => {
+  const { data: session } = useSession();
+  const [showAddProj, setShowAddProj] = useState(false);
+  const [btn, setBtn] = useState(false);
+
   return (
     <>
       <Breadcrumb
         pageName="Projects"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
       />
-      <AddProject />
-
-      <section className="pt-[100px] pb-[100px]">
-        <div className="container">
-          <div className="-mx-4 mb-5 flex flex-wrap justify-center ">
+      <section className="items-center justify-center pt-[100px] pb-[100px]">
+        <div className="container  bg-primary/[3%] ">
+          <div className=" -mx-4 mb-5 flex flex-wrap justify-center pb-3">
             {/* {projectData.map((project) => (
               <div
                 key={project.id}
@@ -27,6 +32,22 @@ const Projects = (props: Props) => {
             ))} */}
             <ProjectData />
           </div>
+          {session?.user && (
+            <button
+              className="btn  mx-auto mb-5 flex items-center justify-center hover:border hover:border-white "
+              onClick={() => {
+                setShowAddProj((prev) => !prev);
+                setBtn((prev) => !prev);
+              }}
+            >
+              {btn ? "Cancel" : "Add New Project"}
+            </button>
+          )}
+          {showAddProj && (
+            <div className="  flex flex-col items-center justify-center border-t-2">
+              <AddProject />
+            </div>
+          )}
 
           <div
             className="wow fadeInUp -mx-4 flex flex-wrap"

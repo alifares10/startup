@@ -5,7 +5,7 @@ import { MouseEventHandler } from "react";
 
 type Props = {};
 
-const SingleProject = ({
+const ViewProject = ({
   project,
   handleDelete,
   handleEdit,
@@ -19,7 +19,7 @@ const SingleProject = ({
   return (
     <>
       <div
-        className="wow fadeInUp relative w-[70%] overflow-hidden rounded-md bg-white shadow-one dark:bg-dark "
+        className="wow fadeInUp relative w-[70%] overflow-hidden rounded-md bg-white bg-primary/[3%] shadow-one dark:bg-dark"
         data-wow-delay=".1s"
       >
         <div className="relative block h-[220px] w-full">
@@ -79,4 +79,4 @@ const SingleProject = ({
   );
 };
 
-export default SingleProject;
+export default ViewProject;

@@ -6,7 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
 import { Providers } from "./providers";
-import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 
 export default function RootLayout({
   children,
@@ -22,7 +22,7 @@ export default function RootLayout({
       <head />
 
       <body className="dark:bg-black">
-        <Providers>
+        <Providers session={undefined}>
           <Header />
           {children}
           <Footer />
