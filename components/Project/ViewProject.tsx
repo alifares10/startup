@@ -15,7 +15,7 @@ const ViewProject = ({
   handleEdit: MouseEventHandler;
 }) => {
   const { data: session } = useSession();
-  const { title, image, paragraph, author, tags, publishDate } = project;
+  const { title, image, paragraph, author, publishDate } = project;
   return (
     <>
       <div

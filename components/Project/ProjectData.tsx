@@ -3,6 +3,7 @@
 import { Project } from "@/types/project";
 import { useEffect, useState } from "react";
 import SingleProject from "@/components/Project/SingleProject";
+import UploadFile from "@/components/Project/UploadFile";
 
 const ProjectsList = ({ data }) => {
   return (

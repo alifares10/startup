@@ -16,7 +16,7 @@ export const GET = async (req, { params }) => {
 };
 
 export const PATCH = async (req, { params }) => {
-  const { author, title, publishDate, paragraph } = await req.json();
+  const { author, title, publishDate, paragraph, image } = await req.json();
 
   try {
     await connectToDB();
@@ -28,6 +28,7 @@ export const PATCH = async (req, { params }) => {
     existingproject.title = title;
     existingproject.publishDate = publishDate;
     existingproject.paragraph = paragraph;
+    existingproject.image = image;
     await existingproject.save();
     return new Response(JSON.stringify(existingproject), { status: 200 });
   } catch (error) {

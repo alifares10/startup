@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { converToBase64 } from "@/components/Project/AddProject";
 
 type Props = {};
 
@@ -9,11 +10,13 @@ const EditProject = ({ handleEdit, project }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptID = searchParams.get("id");
+  const [image64, setImage64] = useState("");
   const [newProject, setNewProject] = useState({
     author: project.author,
     title: project.title,
     publishDate: project.publishDate,
     paragraph: project.paragraph,
+    image: project.image,
   });
 
   const updateProj = async (e) => {
@@ -29,6 +32,7 @@ const EditProject = ({ handleEdit, project }) => {
           title: newProject.title,
           publishDate: newProject.publishDate,
           paragraph: newProject.paragraph,
+          image: newProject.image,
         }),
       });
       if (res.ok) {
@@ -37,6 +41,13 @@ const EditProject = ({ handleEdit, project }) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleImage = async (e) => {
+    // project.image = await converToBase64(e);
+    converToBase64(e, setImage64);
+    newProject.image = image64;
+    console.log(image64);
   };
 
   return (
@@ -55,7 +66,7 @@ const EditProject = ({ handleEdit, project }) => {
               <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
                 Edit Project
               </h2>
-              <form>
+              <form onSubmit={updateProj}>
                 <div className="-mx-4 flex flex-wrap ">
                   <div className="w-full px-4 md:w-1/2">
                     <div className="mb-8">
@@ -99,6 +110,7 @@ const EditProject = ({ handleEdit, project }) => {
                     <div className="mb-8">
                       <label
                         // htmlFor="email"
+
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
                       >
                         Project Date
@@ -113,6 +125,26 @@ const EditProject = ({ handleEdit, project }) => {
                         required
                         className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color
                          shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full px-4 md:w-1/2">
+                    <div className="mb-8">
+                      <label
+                        // htmlFor="email"
+                        className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                      >
+                        Image Upload
+                      </label>
+                      <input
+                        type="file"
+                        // onChange={(e) =>
+                        //   (project.publishDate = e.target.value)
+                        // }
+                        onChange={handleImage}
+                        accept="image/*"
+                        className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color
+                                     shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
                       />
                     </div>
                   </div>
@@ -142,7 +174,7 @@ const EditProject = ({ handleEdit, project }) => {
                     <button
                       className="rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300
                          ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
-                      onClick={updateProj}
+                      type="submit"
                     >
                       Confirm
                     </button>

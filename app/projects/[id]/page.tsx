@@ -14,6 +14,7 @@ const MyProject = ({ params }) => {
   const searchParams = useSearchParams();
   const title = searchParams.get("name");
   const [Edit, setEdit] = useState(false);
+
   useEffect(() => {
     const fetchProject = async () => {
       const res = await fetch(`/api/project/${params?.id}`);

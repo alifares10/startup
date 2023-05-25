@@ -19,6 +19,7 @@ const Projects = (props: Props) => {
         pageName="Projects"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
       />
+
       <section className="items-center justify-center pt-[100px] pb-[100px]">
         <div className="container  bg-primary/[3%] ">
           <div className=" -mx-4 mb-5 flex flex-wrap justify-center pb-3">

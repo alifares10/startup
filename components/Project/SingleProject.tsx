@@ -1,11 +1,10 @@
-import { Project } from "@/types/project";
 import Image from "next/image";
 import Link from "next/link";
 
 type Props = {};
 
-const SingleProject = ({ project }: { project: Project }) => {
-  const { title, image, paragraph, author, tags, publishDate } = project;
+const SingleProject = ({ project }) => {
+  const { title, image, paragraph, author, publishDate } = project;
   return (
     <>
       <div

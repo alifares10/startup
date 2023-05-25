@@ -1,4 +1,4 @@
-import mongoose ,{ConnectOptions } from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 
 let isConnected = false; // track the connection
 
@@ -14,7 +14,7 @@ export const connectToDB = async () => {
       dbName: "Startup",
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    } as ConnectOptions );
+    } as ConnectOptions);
     isConnected = true;
     console.log("MongoDB connected");
   } catch (error) {

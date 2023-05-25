@@ -18,6 +18,7 @@
     "flowbite-react": "^0.4.4",
     "mongodb": "^5.5.0",
     "mongoose": "^7.2.0",
+    "multer": "^1.4.5-lts.1",
     "next": "^13.4.3",
     "next-auth": "^4.22.1",
     "next-themes": "^0.2.1",
@@ -26,6 +27,7 @@
     "react-modal-video": "^2.0.0"
   },
   "devDependencies": {
+    "@types/multer": "^1.4.7",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.34",
     "autoprefixer": "^10.4.13",
