@@ -5,6 +5,8 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import AddProject from "@/components/Project/AddProject";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import uploadFileToS3 from "@/components/Project/UploadToS3";
+import { set } from "mongoose";
 
 type Props = {};
 
@@ -12,6 +14,35 @@ const Projects = (props: Props) => {
   const { data: session } = useSession();
   const [showAddProj, setShowAddProj] = useState(false);
   const [btn, setBtn] = useState(false);
+  const [file, setFile] = useState(null);
+
+  const handleFile = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+    console.log(file);
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    // console.log(file);
+    try {
+      uploadFileToS3(file);
+      // const res = await fetch("/api/upload", {
+      //   method: "POST",
+      //   body: formData,
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      // if (res.ok) {
+      //   router.push("/projects");
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -19,7 +50,6 @@ const Projects = (props: Props) => {
         pageName="Projects"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
       />
-
       <section className="items-center justify-center pt-[100px] pb-[100px]">
         <div className="container  bg-primary/[3%] ">
           <div className=" -mx-4 mb-5 flex flex-wrap justify-center pb-3">
@@ -44,6 +74,27 @@ const Projects = (props: Props) => {
               {btn ? "Cancel" : "Add New Project"}
             </button>
           )}
+          <div className="w-full px-4 md:w-1/2">
+            <div className="mb-8">
+              <label
+                htmlFor="image"
+                className="mb-3 block text-sm font-medium text-dark dark:text-white"
+              >
+                Image Upload
+              </label>
+              <input
+                type="file"
+                name="imageUpload"
+                onChange={(e) => setFile(e.target.files[0])}
+                accept="image/*"
+                className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color
+                                     shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+              />
+              <button className="felx btn" onClick={handleUpload}>
+                Upload Image
+              </button>
+            </div>
+          </div>
           {showAddProj && (
             <div className="  flex flex-col items-center justify-center border-t-2">
               <AddProject />
