@@ -4,6 +4,7 @@ import { error } from "console";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import uploadFileToS3 from "@/components/Project/UploadToS3";
 
 type Props = {};
 
@@ -12,8 +13,6 @@ export function converToBase64(e, setImage64) {
   reader.readAsDataURL(e.target.files[0]);
   reader.onload = () => {
     setImage64(reader.result);
-    // console.log(reader.result);
-    // project.image = reader.result;
   };
   reader.onerror = (error) => {
     console.log("Error", error);
@@ -24,6 +23,7 @@ const AddProject = (props: Props) => {
   const router = useRouter();
   const { data: session } = useSession();
   const [image64, setImage64] = useState("");
+  const [file, setFile] = useState(null);
   const [project, setProject] = useState({
     id: 1,
     title: "",
@@ -55,27 +55,38 @@ const AddProject = (props: Props) => {
   };
 
   const handleImage = async (e) => {
-    // project.image = await converToBase64(e);
     converToBase64(e, setImage64);
     project.image = image64;
     console.log(image64);
   };
 
-  // const handleUpload = async (e) => {
-  //   e.preventDefault();
-  //   // const forData = new formData()
-  //   try {
-  //     const res = await fetch("/api/upload", {
-  //       method: "POST",
-  //       body: e.target.files[0],
-  //     });
-  //     if (res.ok) {
-  //       router.push("/projects");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleFile = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+    console.log(file);
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      // uploadFileToS3(file);
+      // const res = await fetch("/api/upload", {
+      //   method: "POST",
+      //   body: formData,
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      // if (res.ok) {
+      //   router.push("/projects");
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -162,14 +173,18 @@ const AddProject = (props: Props) => {
                           </label>
                           <input
                             type="file"
+                            name="imageUpload"
                             // onChange={(e) =>
                             //   (project.publishDate = e.target.value)
                             // }
-                            onChange={handleImage}
+                            onChange={handleFile}
                             accept="image/*"
                             className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color
                                      shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
                           />
+                          <button className="felx btn" onClick={handleUpload}>
+                            Upload Image
+                          </button>
                         </div>
                       </div>
                       <div className="w-full px-4">
