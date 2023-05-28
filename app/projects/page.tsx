@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import uploadFileToS3 from "@/components/Project/UploadToS3";
 import { set } from "mongoose";
+import router from "next/router";
 
 type Props = {};
 
@@ -28,17 +29,17 @@ const Projects = (props: Props) => {
     formData.append("file", file);
     // console.log(file);
     try {
-      uploadFileToS3(file);
-      // const res = await fetch("/api/upload", {
-      //   method: "POST",
-      //   body: formData,
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      // if (res.ok) {
-      //   router.push("/projects");
-      // }
+      // uploadFileToS3(file);
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.ok) {
+        router.push("/projects");
+      }
     } catch (error) {
       console.log(error);
     }

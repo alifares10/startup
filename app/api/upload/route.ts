@@ -9,15 +9,15 @@ import Busboy from "busboy";
 
 export const POST = async (req, res) => {
   const s3 = new AWS.S3({
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-    region: process.env.S3_BUCKET_REGION,
+    accessKeyId: process.env.NEXT_PUBLIC_S3_ACCESS_KEY,
+    secretAccessKey: process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY,
+    region: process.env.NEXT_PUBLIC_S3_BUCKET_REGION,
   });
 
   const busboy = Busboy({ headers: req.headers });
   busboy.on("file", async (fieldName, file, filename, encoding, mimtype) => {
     const params = {
-      Bucket: process.env.S3_BUCKET_NAME,
+      Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME,
       Key: filename,
       Body: file,
     };
