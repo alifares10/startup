@@ -70,7 +70,6 @@ const AddProject = (props: Props) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-
     try {
       // uploadFileToS3(file);
       // const res = await fetch("/api/upload", {
