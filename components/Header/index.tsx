@@ -7,9 +7,9 @@ import menuData from "./menuData";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Header = () => {
-  //Get User From Session
   const { data: session } = useSession();
   const [toggleProfDropDown, setToggleProfDropDown] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -39,6 +39,16 @@ const Header = () => {
       setOpenIndex(index);
     }
   };
+
+  //Get current user info from db
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const res = await fetch("/api/user");
+      const user = await res.json();
+      setUserInfo(user);
+    };
+    fetchUserInfo();
+  }, []);
 
   return (
     <>
@@ -132,8 +142,9 @@ const Header = () => {
                     <ThemeToggler />
                   </div>
                   <div
-                    className="flex cursor-pointer space-x-1 rounded-full bg-gray  hover:transition-all hover:ease-in-out hover:outline dark:bg-gray/25"
+                    className="flex cursor-pointer space-x-1 rounded-full bg-gray  hover:outline hover:transition-all hover:ease-in-out dark:bg-gray/25"
                     onClick={() => setToggleProfDropDown((prev) => !prev)}
+                    // onClick={GetUserInfo}
                   >
                     <Image
                       src={session?.user.image}
@@ -157,7 +168,7 @@ const Header = () => {
                                          } `}
                     onMouseLeave={() => setToggleProfDropDown((prev) => !prev)}
                   >
-                    <div className=" text-gray-900 block space-y-2 px-0 py-3 text-sm dark:text-white ">
+                    <div className=" block items-center justify-center space-y-2 px-0 py-3 text-sm text-gray dark:text-white">
                       <div className="flex space-x-1 truncate font-medium">
                         {session.user.name}
                       </div>
@@ -171,6 +182,14 @@ const Header = () => {
                         className="text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 block text-sm hover:opacity-70 dark:text-white dark:hover:text-white"
                       >
                         View Profile
+                      </Link>
+                    </div>
+                    <div className="block py-5">
+                      <Link
+                        href={"/admin"}
+                        className="text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 block text-sm hover:opacity-70 dark:text-white dark:hover:text-white"
+                      >
+                        Admin Panel
                       </Link>
                     </div>
                     <div className="block  py-5">

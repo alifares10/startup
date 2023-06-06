@@ -14,8 +14,10 @@ const userSchema = new Schema({
       "Username invalid, it should contain 8-20 alphanumeric letters and be unique!",
     ],
   },
-  image: {
+  role: {
     type: String,
+    enum: ["admin", "user"],
+    default: "user",
   },
 });
 

@@ -13,7 +13,7 @@ const uploadFileToS3 = (file) => {
   };
   console.log(uploadParams);
 
-  return s3.upload(uploadParams).promise();
+  // return s3.upload(uploadParams).promise();
 };
 
 export default uploadFileToS3;

@@ -2,17 +2,16 @@ import Projects from "@/models/Projects";
 import { connectToDB } from "@/utils/database";
 
 export const GET = async (req, { params }) => {
-    try {
-      await connectToDB();
-      const project = await Projects.findById(params.id).populate("title");
-      if (!project) {
-        new Response("Project Not Found", { status: 404 });
-      }
-      return new Response(JSON.stringify(project), { status: 200 });
-    } catch (error) {
-      new Response("Failed to fech project", { status: 500 });
+  try {
+    await connectToDB();
+    const project = await Projects.findById(params.id).populate("title");
+    if (!project) {
+      new Response("Project Not Found", { status: 404 });
     }
-
+    return new Response(JSON.stringify(project), { status: 200 });
+  } catch (error) {
+    new Response("Failed to fech project", { status: 500 });
+  }
 };
 
 export const PATCH = async (req, { params }) => {

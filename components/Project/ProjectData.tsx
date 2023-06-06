@@ -1,7 +1,7 @@
 "use client";
 
 import { Project } from "@/types/project";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import SingleProject from "@/components/Project/SingleProject";
 
 const ProjectsList = ({ data }) => {

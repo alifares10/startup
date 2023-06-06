@@ -60,28 +60,22 @@ const AddProject = (props: Props) => {
     console.log(image64);
   };
 
-  const handleFile = (e) => {
-    e.preventDefault();
-    setFile(e.target.files[0]);
-    console.log(file);
-  };
-
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
+    console.log(formData.get("file"));
     try {
-      // uploadFileToS3(file);
-      // const res = await fetch("/api/upload", {
-      //   method: "POST",
-      //   body: formData,
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      // if (res.ok) {
-      //   router.push("/projects");
-      // }
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.ok) {
+        router.push("/projects");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -176,7 +170,7 @@ const AddProject = (props: Props) => {
                             // onChange={(e) =>
                             //   (project.publishDate = e.target.value)
                             // }
-                            onChange={handleFile}
+                            onChange={(e) => setFile(e.target.files[0])}
                             accept="image/*"
                             className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color
                                      shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"

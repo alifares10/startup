@@ -10,6 +10,7 @@ import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import Video from "@/components/Video";
 import { Inter } from "@next/font/google";
+import RootLayout from "./layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
